@@ -37,10 +37,10 @@ if( !class_exists( 'Dlpinm' ) )
 
 						$sql = "SELECT ID
                         FROM $wpdb->posts 
-                        LEFT JOIN wp_term_relationships on $wpdb->posts.ID = wp_term_relationships.object_id
-                        LEFT JOIN wp_term_taxonomy on wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_taxonomy_id
+                        LEFT JOIN $wpdb->term_relationships on $wpdb->posts.ID = $wpdb->term_relationships.object_id
+                        LEFT JOIN $wpdb->term_taxonomy on $wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id
                         WHERE $wpdb->posts.post_type = '$item->type' AND $wpdb->posts.post_status = 'publish'
-                        AND wp_term_taxonomy.description LIKE '%%'
+                        AND $wpdb->term_taxonomy.description LIKE '%$locale%'
                         ORDER BY $wpdb->posts.menu_order, $wpdb->posts.post_date DESC
                         LIMIT 1";
 			
